@@ -1,0 +1,77 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif, Arial, Helvetica;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 10rem;
+    text-transform: capitalize;
+    color: #ce93d8;
+    margin-bottom: 50px;
+}
+
+input {
+    display: block;
+    width: 300px;
+    padding: 10px;
+    text-transform: capitalize;
+    font-weight: bold;
+    letter-spacing: .5px;
+    border: 1px solid #e0e0e0;
+}
+
+input::placeholder {
+    text-transform: capitalize;
+    font-weight: lighter;
+}
+
+input:focus {
+    border: 1px solid #7b1fa2;
+    outline: none;
+}
+
+.todos_list {
+    margin-bottom: 20px;
+}
+
+.todo {
+    width: 300px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-top: none;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+
+.todo:hover {
+    background-color: #eee;
+}
+
+.todo.disable {
+    color: darkgrey;
+    text-decoration: line-through;
+}
+
+.instruction {
+    text-align: center;
+    font-size: 14px;
+    color: grey;
+    text-transform: capitalize;
+}
+
+@media (max-width: 767px) {
+    .title {
+        font-size: 5rem;
+    }
+}
