@@ -52,7 +52,9 @@ input:focus {
     border-top: none;
     text-transform: capitalize;
     cursor: pointer;
+    position: relative;
 }
+
 
 .todo:hover {
     background-color: #eee;
@@ -63,6 +65,15 @@ input:focus {
     text-decoration: line-through;
 }
 
+.todo .close {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    translate: -5% -50%;
+    font-size: 18px;
+    display: none;
+}
+
 .instruction {
     text-align: center;
     font-size: 14px;
@@ -70,8 +81,28 @@ input:focus {
     text-transform: capitalize;
 }
 
+.small_screen_msg {
+    display: none;
+}
+
 @media (max-width: 767px) {
     .title {
         font-size: 5rem;
+    }
+
+    .large_screen {
+        display: none;
+    }
+
+    .todo .close {
+        display: block;
+    }
+
+    .small_screen_msg {
+        display: block;
+    }
+
+    .large_screen_msg {
+        display: none;
     }
 }

@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
     <script src="app.js" defer></script>
 </head>
@@ -16,8 +19,9 @@
         <input type="text" placeholder="enter your todo">
         <div class="todos_list"></div>
         <div class="instruction">
-            <p>left click to toggle completed</p>
-            <p>right click to delete todo</p>
+            <p class="large_screen_msg">left click to toggle completed</p>
+            <p class="small_screen_msg">click to toggle completed</p>
+            <p class="large_screen">right click to delete todo</p>
         </div>
     </div>
 </body>

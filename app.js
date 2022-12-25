@@ -1,6 +1,5 @@
 const input = document.querySelector("input");
 const todosList = document.querySelector(".todos_list");
-let todoID = 0;
 
 if (localStorage.getItem("todos")) {
   getTodosFromLocalStorageToDOM();
@@ -14,18 +13,36 @@ document.addEventListener("keyup", (e) => {
   }
 });
 
+input.addEventListener("blur", () => {
+  if (input.value != "") {
+    createNewTodo();
+    input.value = "";
+    setTodosToLocalStorage();
+  }
+});
+
 function createNewTodo() {
-  const todo = document.createElement("p");
+  const todo = document.createElement("div");
   todo.classList.add("todo");
-  todo.innerHTML = input.value;
+  const todoContent = document.createElement("p");
+  todoContent.innerHTML = input.value;
+  const closeIcone = document.createElement("i");
+  closeIcone.classList.add("fa-solid");
+  closeIcone.classList.add("fa-xmark");
+  closeIcone.classList.add("close");
+  todo.append(todoContent);
+  todo.append(closeIcone);
   todosList.appendChild(todo);
   disableTodo(todo);
   removeTodo(todo);
+  deleteTodoWithCloseIcone(closeIcone);
 }
 
 function disableTodo(todo) {
   todo.addEventListener("mouseup", (e) => {
-    if (e.button === 0) {
+    if (e.target.classList.contains("close")) {
+      e.target.closest(".todo").remove();
+    } else {
       todo.classList.toggle("disable");
     }
     setTodosToLocalStorage();
@@ -40,13 +57,21 @@ function removeTodo(todo) {
   });
 }
 
+function deleteTodoWithCloseIcone(closeIcone) {
+  closeIcone.addEventListener("click", () => {
+    closeIcone.closest(".todo").remove();
+  });
+}
+
 function setTodosToLocalStorage() {
-  const todos = todosList.querySelectorAll(".todo");
+  const todos = document.querySelectorAll(".todo p");
   const todosArray = [];
   todos.forEach((todo) => {
     todosArray.push({
       content: todo.innerHTML,
-      completed: todo.classList.contains("disable") ? true : false,
+      completed: todo.parentElement.classList.contains("disable")
+        ? true
+        : false,
     });
   });
   localStorage.setItem("todos", JSON.stringify(todosArray));
@@ -60,12 +85,19 @@ function getTodosFromLocalStorageToDOM() {
 }
 
 function createNewTodoFromLocalStorage(todoLS) {
-  const todo = document.createElement("p");
+  const todo = document.createElement("div");
   todo.classList.add("todo");
+  const todoContent = document.createElement("p");
+  todoContent.innerHTML = todoLS.content;
+  const closeIcone = document.createElement("i");
+  closeIcone.classList.add("fa-solid");
+  closeIcone.classList.add("fa-xmark");
+  closeIcone.classList.add("close");
+  todo.append(todoContent);
+  todo.append(closeIcone);
   if (todoLS.completed === true) {
     todo.classList.add("disable");
   }
-  todo.innerHTML = todoLS.content;
   todosList.appendChild(todo);
   disableTodo(todo);
   removeTodo(todo);
